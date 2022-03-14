@@ -76,7 +76,7 @@ export default function Header(props) {
   });
   const brandComponent = (
     <Link href="/components" as="/components">
-      <Button className={classes.title}>{brand}</Button>
+      <h3 style={{ fontWeight: "500", fontSize: "24px", color: "black" }}>Soners<span style={{ color: "#f4522c" }}>Hub</span></h3>
     </Link>
   );
   return (
