@@ -19,6 +19,8 @@ import { Fade } from "react-awesome-reveal";
 // sections for this page
 
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
+import Router from "next/router";
+
 
 const useStyles = makeStyles(styles);
 
@@ -55,6 +57,15 @@ export default function Components(props) {
 
     }
   });
+  React.useEffect(() => {
+    if (localStorage.getItem("admin") == "true") {
+      Router.push("/admin");
+    }
+
+    console.log("hola")
+
+
+  }, [])
   return (
     <div>
       <Header
