@@ -20,6 +20,7 @@ import { Fade } from "react-awesome-reveal";
 
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
 import Router from "next/router";
+import { black, gold, pink, white } from "styles/colors"
 
 
 const useStyles = makeStyles(styles);
@@ -97,7 +98,7 @@ export default function Components(props) {
         </div>
       </Parallax>
 
-      <div className={classNames(classes.main)}>
+      <div className={classNames(classes.main)} style={{ backgroundColor: pink }}>
         <div
           className={classes.containerFluid}
           style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "4%", paddingBottom: "4%" }}

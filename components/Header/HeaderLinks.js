@@ -67,7 +67,7 @@ export default function HeaderLinks(props) {
           href="#"
           className={classes.navLink}
           onClick={() => { }}
-          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "white", border: "1px solid black", color: "black", padding: "10px 18px" }}
+          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black", padding: "10px 18px" }}
         >
           create
         </Button>

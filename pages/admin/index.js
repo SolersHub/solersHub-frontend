@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
 import { Fade } from "react-awesome-reveal";
 import GridContainer from "components/Grid/GridContainer.js";
+import Accordion from "components/Accordion/Accordion.js"
 import GridItem from "components/Grid/GridItem.js";
 import Slide from "@material-ui/core/Slide";
 import Button from "components/CustomButtons/Button.js";
@@ -23,7 +24,9 @@ import DialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
 
+
 import style from "styles/jss/nextjs-material-kit/pages/componentsSections/javascriptStyles.js";
+import { black, gold, pink, white } from "styles/colors"
 
 const useStyles = makeStyles(styles);
 const useStyle = makeStyles(style);
@@ -127,12 +130,14 @@ function index(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
-            <div className={classes.main}>
+            <div className={classes.main} style={{ backgroundColor: pink }}>
                 <div className={classes.containerFluid} style={{ padding: "100px 8%", marginTop: "50px" }}>
                     <GridContainer>
-                        <GridItem xs={12} sm={12} md={9}>
+                        <GridItem xs={12} sm={12} md={8}>
                             <div className={classes.containerFluid}>
                                 <h3>My courses</h3>
+                                <Accordion />
+                                <Accordion />
 
                             </div>
 
@@ -142,6 +147,7 @@ function index(props) {
                 </div>
 
             </div>
+            <Footer />
 
         </div>
     )

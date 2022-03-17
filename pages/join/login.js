@@ -28,17 +28,13 @@ function login(props) {
 
 
 
-    // useEffect(() => {
-    //     if (auth.user) {
-    //         if (auth.admin) {
-    //             Router.push("/admin");
-    //         } else {
-    //             Router.push("/learn");
-    //         }
+    useEffect(() => {
+        if (localStorage.getItem("user") !== "" && localStorage.getItem("admin") == "true") {
+            Router.push("/admin");
 
-    //     }
+        }
 
-    // }, [success])
+    }, [])
 
 
     function handleLogin() {
@@ -47,6 +43,7 @@ function login(props) {
             if (response.status == "success") {
                 localStorage.setItem("token", response.token)
                 setSuccess(true)
+                Router.push("/admin");
 
             }
 

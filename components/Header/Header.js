@@ -63,9 +63,9 @@ export default function Header(props) {
 
   const leftLinks = (
     <div className={classes.containerFluid}>
-      <div className={classes.flex} style={{ width: "90%", margin: "0 auto", borderRadius: "24px", height: "45px", border: "1px solid black", color: "black", padding: "10px 18px", display: "flex" }}>
+      <div className={classes.flex} style={{ width: "90%", margin: "0 auto", borderRadius: "24px", height: "45px", border: "1px solid black", color: "black", padding: "10px 18px", display: "flex", backgroundColor: "#f7f1ea" }}>
         <Search />
-        <input placeholder="what do you want to learn?" type="text" style={{ width: "80%", height: "100%", border: "none", outline: "none" }} />
+        <input placeholder="what do you want to learn?" type="text" style={{ width: "80%", height: "100%", border: "none", outline: "none", backgroundColor: "transparent" }} />
       </div>
     </div>);
   const appBarClasses = classNames({
