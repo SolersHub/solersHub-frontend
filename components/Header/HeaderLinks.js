@@ -33,7 +33,6 @@ export default function HeaderLinks(props) {
 
 
   }, [])
-  console.log(localStorage.getItem("admin"))
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
