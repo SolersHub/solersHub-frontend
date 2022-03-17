@@ -13,6 +13,7 @@ import Icon from "@material-ui/core/Icon";
 import { Apps, CloudDownload } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
+import { useAuth } from "utils/hooks/useAuth"
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -23,7 +24,16 @@ import styles from "styles/jss/nextjs-material-kit/components/headerLinksStyle.j
 const useStyles = makeStyles(styles);
 
 export default function HeaderLinks(props) {
+  const auth = useAuth();
   const classes = useStyles();
+  const [admin, setAdmin] = React.useState(false)
+  React.useEffect(() => {
+
+    console.log("hola")
+
+
+  }, [])
+  console.log(localStorage.getItem("admin"))
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -50,24 +60,54 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
-      <ListItem className={classes.listItem}>
+      {localStorage.getItem("admin") == "true" ? <ListItem className={classes.listItem}>
         <Button
           href="#"
           className={classes.navLink}
+          onClick={() => { }}
           style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "white", border: "1px solid black", color: "black", padding: "10px 18px" }}
         >
-          Login
+          create
         </Button>
-      </ListItem>
-      <ListItem className={classes.listItem}>
-        <Button
-          href="#"
-          className={classes.navLink}
-          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
-        >
-          Sign Up
-        </Button>
-      </ListItem>
+      </ListItem> : (<></>)}
+      {auth.user ? (<>
+
+        <ListItem className={classes.listItem}>
+          <Button
+            href="/join/login"
+            className={classes.navLink}
+            onClick={() => { auth.signout() }}
+            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
+          >
+            Sign Out
+          </Button>
+        </ListItem>
+      </>) : <>
+        <ListItem className={classes.listItem}>
+          <Button
+            href="/join/login"
+            className={classes.navLink}
+            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "white", border: "1px solid black", color: "black", padding: "10px 18px" }}
+          >
+            Login
+          </Button>
+        </ListItem>
+        <ListItem className={classes.listItem}>
+          <Button
+            href="/join/signup"
+            className={classes.navLink}
+            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
+          >
+            Sign Up
+          </Button>
+        </ListItem>
+
+      </>
+
+
+
+      }
+
 
 
     </List>
