@@ -41,7 +41,7 @@ function index(props) {
     const auth = useAuth();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("")
-    const [classicModal, setClassicModal] = React.useState(true);
+    const [classicModal, setClassicModal] = React.useState(false);
     const [success, setSuccess] = useState(false)
 
 
@@ -127,6 +127,22 @@ function index(props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <div className={classes.main}>
+                <div className={classes.containerFluid} style={{ padding: "100px 8%", marginTop: "50px" }}>
+                    <GridContainer>
+                        <GridItem xs={12} sm={12} md={9}>
+                            <div className={classes.containerFluid}>
+                                <h3>My courses</h3>
+
+                            </div>
+
+                        </GridItem>
+                    </GridContainer>
+
+                </div>
+
+            </div>
+
         </div>
     )
 }
