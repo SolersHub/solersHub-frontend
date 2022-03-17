@@ -28,6 +28,9 @@ export default function HeaderLinks(props) {
   const classes = useStyles();
   const [admin, setAdmin] = React.useState(false)
   React.useEffect(() => {
+    if (localStorage.getItem("admin") == "true") {
+      setAdmin(true)
+    }
 
     console.log("hola")
 
@@ -59,7 +62,7 @@ export default function HeaderLinks(props) {
           ]}
         />
       </ListItem>
-      {localStorage.getItem("admin") == "true" ? <ListItem className={classes.listItem}>
+      {admin == true ? <ListItem className={classes.listItem}>
         <Button
           href="#"
           className={classes.navLink}
