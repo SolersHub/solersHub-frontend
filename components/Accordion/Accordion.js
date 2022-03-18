@@ -67,7 +67,7 @@ export default function DetailedAccordion() {
 
     const handleDrop = (newPlacement) => (event) => {
         setAnchorEl(event.currentTarget);
-        setOpen((prev) => placement !== newPlacement || !prev);
+        setOpen(!open);
         setPlacement(newPlacement);
     };
 
@@ -107,13 +107,9 @@ export default function DetailedAccordion() {
                                 More
                             </Button>
                             <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
-                                {({ TransitionProps }) => (
-                                    <Fade {...TransitionProps} timeout={350}>
-                                        <Paper>
-                                            <Typography className={classes.typography}>The content of the Popper.</Typography>
-                                        </Paper>
-                                    </Fade>
-                                )}
+                                <Paper>
+                                    <Typography className={classes.typography}>The content of the Popper.</Typography>
+                                </Paper>
                             </Popper>
                             <Button
                                 href="#"
