@@ -96,6 +96,7 @@ const successColor = "#4caf50";
 const infoColor = "#00acc1";
 const roseColor = "#e91e63";
 const grayColor = "#999999";
+const blackColor = "#000000"
 
 const primaryBoxShadow = {
   boxShadow: `0 12px 20px -10px ${hexToRGBAlpha(
@@ -239,6 +240,7 @@ export {
   warningColor,
   dangerColor,
   successColor,
+  blackColor,
   infoColor,
   roseColor,
   grayColor,

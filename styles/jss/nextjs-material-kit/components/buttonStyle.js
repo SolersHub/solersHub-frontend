@@ -7,6 +7,7 @@ import {
   successColor,
   warningColor,
   dangerColor,
+  blackColor,
 } from "styles/jss/nextjs-material-kit.js";
 
 const buttonStyle = {
@@ -93,6 +94,12 @@ const buttonStyle = {
         primaryColor,
         0.2
       )}`,
+    },
+  },
+  black: {
+    "&,&:focus,&:hover,&:visited": {
+      backgroundColor: "black",
+      color: "white",
     },
   },
   info: {

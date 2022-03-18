@@ -91,15 +91,17 @@ export default function DetailedAccordion() {
                     </Button>
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
-                        <div style={{ margin: "auto 0" }}>
+                        <div style={{ margin: "auto 0", display: "flex" }}>
                             <CustomDropdown
+                                caret={false}
                                 navDropdown
                                 more={true}
                                 buttonText="More"
                                 buttonProps={{
                                     className: classes.navLink,
-                                    color: "transparent",
+                                    color: "black",
                                 }}
+                                color="black"
                                 hoverColor="black"
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                                 dropdownList={[
@@ -136,17 +138,34 @@ export default function DetailedAccordion() {
                 <div className={classe.containerFluid}>
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Concept of Forex</h3>
-                        <div style={{ margin: "auto 0" }}>
-
-                            <Button
-                                href="#"
-                                className={classes.navLink}
-                                onClick={() => { }}
+                        <div style={{ margin: "auto 0", display: "flex" }}>
+                            <CustomDropdown
+                                caret={false}
+                                navDropdown
+                                more={true}
+                                buttonText="More"
+                                buttonProps={{
+                                    className: classes.navLink,
+                                    color: "black",
+                                }}
+                                color="black"
+                                hoverColor="black"
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
-                            >
-                                <MoreVert />
-                                More
-                            </Button>
+                                dropdownList={[
+                                    <Link href="/components">
+                                        <a className={classes.dropdownLink}>Categories</a>
+                                    </Link>,
+                                    <a
+                                        href="https://creativetimofficial.github.io/nextjs-material-kit/#/documentation?ref=njsmk-navbar"
+                                        target="_blank"
+                                        className={classes.dropdownLink}
+                                    >
+                                        Documentation
+                                    </a>,
+                                ]}
+                            />
+
+
                             <Button
                                 href="#"
                                 className={classes.navLink}

@@ -11,6 +11,7 @@ import {
   dangerColor,
   dangerBoxShadow,
   roseColor,
+  blackColor,
   roseBoxShadow,
 } from "styles/jss/nextjs-material-kit.js";
 

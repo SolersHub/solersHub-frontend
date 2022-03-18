@@ -14,6 +14,7 @@ import Grow from "@material-ui/core/Grow";
 import Divider from "@material-ui/core/Divider";
 import Icon from "@material-ui/core/Icon";
 import Popper from "@material-ui/core/Popper";
+import { MenuBookOutlined, MoreVert } from '@material-ui/icons';
 
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -58,6 +59,7 @@ export default function CustomDropdown(props) {
     rtlActive,
     noLiPadding,
     navDropdown,
+    color
   } = props;
   const caretClasses = classNames({
     [classes.caret]: true,
@@ -91,7 +93,7 @@ export default function CustomDropdown(props) {
           aria-haspopup="true"
           {...buttonProps}
           onClick={handleClick}
-          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "transparent", color: "black", padding: "10px 18px" }}
+          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: color ? color : "transparent", color: color ? "white" : "black", padding: "10px 18px" }}
         >
           {icon}
           {more ? <MoreVert /> : null}
