@@ -65,7 +65,7 @@ function useProvideAuth() {
                 localStorage.setItem("admin", true)
                 localStorage.setItem("user", JSON.stringify(response.data.data))
                 console.log(response.data)
-                return response.data.data;
+                return response.data;
             });
     };
     const adminsignup = (email, password) => {
