@@ -17,7 +17,7 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent/index';
-import { MenuBookOutlined } from '@material-ui/icons';
+import { MenuBookOutlined, MoreVertIcon } from '@material-ui/icons';
 import { black, gold, pink, white } from "styles/colors"
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
 
@@ -112,13 +112,16 @@ export default function DetailedAccordion() {
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Concept of Forex</h3>
                         <div style={{ margin: "auto 0" }}>
+
                             <Button
                                 href="#"
+                                justIcon
                                 className={classes.navLink}
                                 onClick={() => { }}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                             >
-                                Edit
+                                <MoreVertIcon />
+                                More
                             </Button>
                             <Button
                                 href="#"
