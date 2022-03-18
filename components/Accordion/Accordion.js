@@ -62,30 +62,11 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailedAccordion() {
     const classes = useStyles();
     const classe = useStyle()
-    const [anchorEl, setAnchorEl] = React.useState(null);
 
-    const handleClick = (event) => {
-        setAnchorEl(anchorEl ? null : event.currentTarget);
-    };
 
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popper' : undefined;
-
-    const handleDrop = (newPlacement) => (event) => {
-        setAnchorEl(event.currentTarget);
-        setOpen((prev) => placement !== newPlacement || !prev);
-        setPlacement(newPlacement);
-    };
 
     return (
         <div className={classes.root} style={{ marginBottom: "30px" }} >
-            <Popper id={id} open={open} anchorEl={anchorEl} transition>
-                {({ TransitionProps }) => (
-                    <Fade {...TransitionProps} timeout={350}>
-                        <div className={classes.paper}>The content of the Popper.</div>
-                    </Fade>
-                )}
-            </Popper>
             <Accordion defaultExpanded style={{ padding: "30px auto" }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon style={{ width: "48px", height: "36px" }} />}
@@ -110,48 +91,14 @@ export default function DetailedAccordion() {
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
                         <div style={{ margin: "auto 0" }}>
-                            {/* <CustomDropdown buttonText="More" buttonIcon={<MoreVert />} buttonProps={{
-                                className: classes.navLink,
-                                color: "transparent",
-
-                            }}
+                            <Button
+                                href="#"
+                                className={classes.navLink}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
-                                dropdownList={[
-                                    <Link href="/components">
-                                        <a className={classes.dropdownLink}>Categories</a>
-                                    </Link>,
-                                    <a
-                                        href="https://creativetimofficial.github.io/nextjs-material-kit/#/documentation?ref=njsmk-navbar"
-                                        target="_blank"
-                                        className={classes.dropdownLink}
-                                    >
-                                        Documentation
-                                    </a>,
-                                ]}
-                                hoverColor="black"
-                            /> */}
-                            <CustomDropdown
-                                navDropdown
-                                buttonText="Categories"
-                                buttonProps={{
-                                    className: classes.navLink,
-                                    color: "transparent",
-                                }}
-                                hoverColor="black"
-                                style={{ color: "black", backgroundColor: "transparent", fontWeight: "500" }}
-                                dropdownList={[
-                                    <Link href="/components">
-                                        <a className={classes.dropdownLink}>Categories</a>
-                                    </Link>,
-                                    <a
-                                        href="https://creativetimofficial.github.io/nextjs-material-kit/#/documentation?ref=njsmk-navbar"
-                                        target="_blank"
-                                        className={classes.dropdownLink}
-                                    >
-                                        Documentation
-                                    </a>,
-                                ]}
-                            />
+                            >
+                                <MoreVert />
+                                More
+                            </Button>
 
                             <Button
                                 href="#"
