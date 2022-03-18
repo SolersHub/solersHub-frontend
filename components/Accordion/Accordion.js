@@ -6,6 +6,7 @@ import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Fade from '@material-ui/core/Fade';
 import Paper from '@material-ui/core/Paper';
+import Popper from '@material-ui/core/Popper';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -67,7 +68,7 @@ export default function DetailedAccordion() {
 
     const handleDrop = (newPlacement) => (event) => {
         setAnchorEl(event.currentTarget);
-        setOpen(!open);
+        setOpen((prev) => placement !== newPlacement || !prev);
         setPlacement(newPlacement);
     };
 
@@ -107,9 +108,13 @@ export default function DetailedAccordion() {
                                 More
                             </Button>
                             <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
-                                <Paper>
-                                    <Typography className={classes.typography}>The content of the Popper.</Typography>
-                                </Paper>
+                                {({ TransitionProps }) => (
+                                    <Fade {...TransitionProps} timeout={350}>
+                                        <Paper>
+                                            <Typography className={classes.typography}>The content of the Popper.</Typography>
+                                        </Paper>
+                                    </Fade>
+                                )}
                             </Popper>
                             <Button
                                 href="#"
