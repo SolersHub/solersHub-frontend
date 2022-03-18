@@ -91,7 +91,8 @@ export default function DetailedAccordion() {
                                 onClick={() => { }}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                             >
-                                Edit
+                                <MoreVert />
+                                More
                             </Button>
                             <Button
                                 href="#"
@@ -115,7 +116,6 @@ export default function DetailedAccordion() {
 
                             <Button
                                 href="#"
-                                justIcon
                                 className={classes.navLink}
                                 onClick={() => { }}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
