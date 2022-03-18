@@ -17,7 +17,7 @@ import TimelineConnector from '@material-ui/lab/TimelineConnector';
 import TimelineContent from '@material-ui/lab/TimelineContent';
 import TimelineDot from '@material-ui/lab/TimelineDot';
 import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent/index';
-import { MenuBookOutlined, MoreVertIcon } from '@material-ui/icons';
+import { MenuBookOutlined, MoreVert } from '@material-ui/icons';
 import { black, gold, pink, white } from "styles/colors"
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
 
@@ -120,7 +120,7 @@ export default function DetailedAccordion() {
                                 onClick={() => { }}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                             >
-                                <MoreVertIcon />
+                                <MoreVert />
                                 More
                             </Button>
                             <Button
