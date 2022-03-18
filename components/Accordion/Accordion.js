@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
+import Link from "next/link";
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Fade from '@material-ui/core/Fade';
@@ -91,6 +92,28 @@ export default function DetailedAccordion() {
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
                         <div style={{ margin: "auto 0" }}>
+                            <CustomDropdown
+                                navDropdown
+                                buttonText="Categories"
+                                buttonProps={{
+                                    className: classes.navLink,
+                                    color: "transparent",
+                                }}
+                                hoverColor="black"
+                                style={{ color: "black", backgroundColor: "transparent", fontWeight: "500" }}
+                                dropdownList={[
+                                    <Link href="/components">
+                                        <a className={classes.dropdownLink}>Categories</a>
+                                    </Link>,
+                                    <a
+                                        href="https://creativetimofficial.github.io/nextjs-material-kit/#/documentation?ref=njsmk-navbar"
+                                        target="_blank"
+                                        className={classes.dropdownLink}
+                                    >
+                                        Documentation
+                                    </a>,
+                                ]}
+                            />
                             <Button
                                 href="#"
                                 className={classes.navLink}
