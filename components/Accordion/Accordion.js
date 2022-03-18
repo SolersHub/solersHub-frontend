@@ -110,16 +110,12 @@ export default function DetailedAccordion() {
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
                         <div style={{ margin: "auto 0" }}>
-                            <Button
-                                href="#"
-                                className={classes.navLink}
-                                aria-describedby={id}
-                                onClick={handleClick}
-                                style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
-                            >
-                                <MoreVert />
-                                More
-                            </Button>
+                            <CustomDropdown buttonText="More" buttonIcon={<MoreVert />} buttonProps={{
+                                className: classes.navLink,
+                                color: "transparent",
+                                style: { fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }
+                            }} />
+
 
                             <Button
                                 href="#"
