@@ -107,13 +107,7 @@ export default function DetailedAccordion() {
                                 <MoreVert />
                                 More
                             </Button>
-                            <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
 
-                                <Paper>
-                                    <Typography className={classes.typography}>The content of the Popper.</Typography>
-                                </Paper>
-
-                            </Popper>
                             <Button
                                 href="#"
                                 className={classes.navLink}
@@ -124,6 +118,13 @@ export default function DetailedAccordion() {
                             </Button>
 
                         </div>
+                        <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
+
+                            <Paper>
+                                <Typography className={classes.typography}>The content of the Popper.</Typography>
+                            </Paper>
+
+                        </Popper>
                     </div>
 
                 </div>
