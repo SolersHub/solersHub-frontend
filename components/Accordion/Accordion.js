@@ -107,14 +107,12 @@ export default function DetailedAccordion() {
                                 <MoreVert />
                                 More
                             </Button>
-                            <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
-                                {({ TransitionProps }) => (
-                                    <Fade {...TransitionProps} timeout={350}>
-                                        <Paper>
-                                            <Typography className={classes.typography}>The content of the Popper.</Typography>
-                                        </Paper>
-                                    </Fade>
-                                )}
+                            <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
+
+                                <Paper>
+                                    <Typography className={classes.typography}>The content of the Popper.</Typography>
+                                </Paper>
+
                             </Popper>
                             <Button
                                 href="#"
@@ -177,7 +175,7 @@ export default function DetailedAccordion() {
                         Publish
                     </Button>
                 </AccordionActions>
-            </Accordion>
-        </div>
+            </Accordion >
+        </div >
     );
 }
