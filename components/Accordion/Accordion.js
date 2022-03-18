@@ -94,13 +94,14 @@ export default function DetailedAccordion() {
                         <div style={{ margin: "auto 0" }}>
                             <CustomDropdown
                                 navDropdown
-                                buttonText="Categories"
+                                buttonIcon={<MoreVert />}
+                                buttonText="More"
                                 buttonProps={{
                                     className: classes.navLink,
                                     color: "transparent",
                                 }}
                                 hoverColor="black"
-                                style={{ color: "black", backgroundColor: "transparent", fontWeight: "500" }}
+                                style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                                 dropdownList={[
                                     <Link href="/components">
                                         <a className={classes.dropdownLink}>Categories</a>
@@ -114,14 +115,7 @@ export default function DetailedAccordion() {
                                     </a>,
                                 ]}
                             />
-                            <Button
-                                href="#"
-                                className={classes.navLink}
-                                style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
-                            >
-                                <MoreVert />
-                                More
-                            </Button>
+
 
                             <Button
                                 href="#"
