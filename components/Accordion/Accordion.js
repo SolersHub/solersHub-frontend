@@ -113,8 +113,23 @@ export default function DetailedAccordion() {
                             <CustomDropdown buttonText="More" buttonIcon={<MoreVert />} buttonProps={{
                                 className: classes.navLink,
                                 color: "transparent",
-                                style: { fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }
-                            }} />
+
+                            }}
+                                style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
+                                dropdownList={[
+                                    <Link href="/components">
+                                        <a className={classes.dropdownLink}>Categories</a>
+                                    </Link>,
+                                    <a
+                                        href="https://creativetimofficial.github.io/nextjs-material-kit/#/documentation?ref=njsmk-navbar"
+                                        target="_blank"
+                                        className={classes.dropdownLink}
+                                    >
+                                        Documentation
+                                    </a>,
+                                ]}
+                                hoverColor="black"
+                            />
 
 
                             <Button
