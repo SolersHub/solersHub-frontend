@@ -4,6 +4,8 @@ import clsx from 'clsx';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
+import Fade from '@material-ui/core/Fade';
+import Paper from '@material-ui/core/Paper';
 import AccordionActions from '@material-ui/core/AccordionActions';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -20,6 +22,7 @@ import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent/in
 import { MenuBookOutlined, MoreVert } from '@material-ui/icons';
 import { black, gold, pink, white } from "styles/colors"
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
+import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
 
 const useStyle = makeStyles(styles);
 
@@ -58,6 +61,15 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailedAccordion() {
     const classes = useStyles();
     const classe = useStyle()
+    const [open, setOpen] = React.useState(false);
+    const [placement, setPlacement] = React.useState();
+    const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleDrop = (newPlacement) => (event) => {
+        setAnchorEl(event.currentTarget);
+        setOpen((prev) => placement !== newPlacement || !prev);
+        setPlacement(newPlacement);
+    };
 
     return (
         <div className={classes.root} style={{ marginBottom: "30px" }} >
@@ -88,12 +100,21 @@ export default function DetailedAccordion() {
                             <Button
                                 href="#"
                                 className={classes.navLink}
-                                onClick={() => { }}
+                                onClick={handleDrop('bottom')}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                             >
                                 <MoreVert />
                                 More
                             </Button>
+                            <Popper open={open} anchorEl={anchorEl} placement={placement} transition>
+                                {({ TransitionProps }) => (
+                                    <Fade {...TransitionProps} timeout={350}>
+                                        <Paper>
+                                            <Typography className={classes.typography}>The content of the Popper.</Typography>
+                                        </Paper>
+                                    </Fade>
+                                )}
+                            </Popper>
                             <Button
                                 href="#"
                                 className={classes.navLink}
