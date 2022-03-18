@@ -62,9 +62,14 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailedAccordion() {
     const classes = useStyles();
     const classe = useStyle()
-    const [open, setOpen] = React.useState(false);
-    const [placement, setPlacement] = React.useState();
     const [anchorEl, setAnchorEl] = React.useState(null);
+
+    const handleClick = (event) => {
+        setAnchorEl(anchorEl ? null : event.currentTarget);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popper' : undefined;
 
     const handleDrop = (newPlacement) => (event) => {
         setAnchorEl(event.currentTarget);
@@ -74,12 +79,12 @@ export default function DetailedAccordion() {
 
     return (
         <div className={classes.root} style={{ marginBottom: "30px" }} >
-            <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
-
-                <Paper>
-                    <Typography className={classes.typography}>The content of the Popper.</Typography>
-                </Paper>
-
+            <Popper id={id} open={open} anchorEl={anchorEl} transition>
+                {({ TransitionProps }) => (
+                    <Fade {...TransitionProps} timeout={350}>
+                        <div className={classes.paper}>The content of the Popper.</div>
+                    </Fade>
+                )}
             </Popper>
             <Accordion defaultExpanded style={{ padding: "30px auto" }}>
                 <AccordionSummary
@@ -108,7 +113,8 @@ export default function DetailedAccordion() {
                             <Button
                                 href="#"
                                 className={classes.navLink}
-                                onClick={handleDrop('bottom')}
+                                aria-describedby={id}
+                                onClick={handleClick}
                                 style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px" }}
                             >
                                 <MoreVert />
