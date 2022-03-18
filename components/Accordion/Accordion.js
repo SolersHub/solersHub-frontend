@@ -94,7 +94,7 @@ export default function DetailedAccordion() {
                         <div style={{ margin: "auto 0" }}>
                             <CustomDropdown
                                 navDropdown
-                                buttonIcon={<MoreVert />}
+                                more={true}
                                 buttonText="More"
                                 buttonProps={{
                                     className: classes.navLink,

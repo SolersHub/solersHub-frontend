@@ -53,6 +53,7 @@ export default function CustomDropdown(props) {
     dropdownHeader,
     caret,
     hoverColor,
+    more,
     left,
     rtlActive,
     noLiPadding,
@@ -93,6 +94,7 @@ export default function CustomDropdown(props) {
           style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "transparent", color: "black", padding: "10px 18px" }}
         >
           {icon}
+          {more ? <MoreVert /> : null}
           {buttonText !== undefined ? buttonText : null}
           {caret ? <b className={caretClasses} /> : null}
 
