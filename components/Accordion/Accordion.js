@@ -70,10 +70,11 @@ export default function DetailedAccordion() {
                     <div className={classes.column} style={{ paddingLeft: "20px" }}>
                         <Typography className={classes.heading} style={{ textTransform: "uppercase", fontWeight: "400" }}>course</Typography>
                         <h3 style={{ fontSize: "20px", fontWeight: "500" }}>Learn Forex</h3>
-                        <h3 style={{ fontSize: "20px", fontWeight: "500" }}>Edit</h3>
+
                     </div>
                 </AccordionSummary>
                 <div className={classe.containerFluid}>
+                    <h3 style={{ fontSize: "20px", fontWeight: "500", marginLeft: "3%" }}>Edit</h3>
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
                         <div style={{ margin: "auto 0" }}>
