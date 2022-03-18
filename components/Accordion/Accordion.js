@@ -74,6 +74,13 @@ export default function DetailedAccordion() {
 
     return (
         <div className={classes.root} style={{ marginBottom: "30px" }} >
+            <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
+
+                <Paper>
+                    <Typography className={classes.typography}>The content of the Popper.</Typography>
+                </Paper>
+
+            </Popper>
             <Accordion defaultExpanded style={{ padding: "30px auto" }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon style={{ width: "48px", height: "36px" }} />}
@@ -118,13 +125,7 @@ export default function DetailedAccordion() {
                             </Button>
 
                         </div>
-                        <Popper open={true} anchorEl={anchorEl} placement={placement} transition>
 
-                            <Paper>
-                                <Typography className={classes.typography}>The content of the Popper.</Typography>
-                            </Paper>
-
-                        </Popper>
                     </div>
 
                 </div>
