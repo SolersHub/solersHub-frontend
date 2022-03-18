@@ -74,7 +74,14 @@ export default function DetailedAccordion() {
                     </div>
                 </AccordionSummary>
                 <div className={classe.containerFluid}>
-                    <h3 style={{ fontSize: "20px", fontWeight: "500", marginLeft: "3%" }}>Edit</h3>
+                    <Button
+                        href="#"
+                        className={classes.navLink}
+                        onClick={() => { }}
+                        style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: black, border: "1px solid black", color: white, padding: "10px 18px", marginLeft: "3%" }}
+                    >
+                        Edit
+                    </Button>
                     <div className={classe.container} style={{ backgroundColor: pink, height: "60px", margin: "2px 3% 20px 3%", width: "94%", display: "flex", justifyContent: "space-between" }}>
                         <h3 style={{ margin: "auto 0" }}>Introduction</h3>
                         <div style={{ margin: "auto 0" }}>
