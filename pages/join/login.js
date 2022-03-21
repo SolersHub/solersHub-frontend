@@ -29,8 +29,8 @@ function login(props) {
 
 
     useEffect(() => {
-        if (localStorage.getItem("user") !== "" && localStorage.getItem("admin") == "true") {
-            Router.push("/admin");
+        if (localStorage.getItem("user") !== "" && localStorage.getItem("admin") !== "true") {
+            Router.push("/learn");
 
         }
 
@@ -38,12 +38,12 @@ function login(props) {
 
 
     function handleLogin() {
-        auth.adminsignin(email, password).then((response) => {
+        auth.signin(email, password).then((response) => {
             console.log(response)
             if (response.status == "success") {
                 localStorage.setItem("token", response.token)
                 setSuccess(true)
-                Router.push("/admin");
+                Router.push("/learn");
 
             }
 

@@ -31,21 +31,30 @@ function useProvideAuth() {
             .then((response) => {
                 setUser(response.data.data);
                 console.log(response.data.data)
+                setAdmin(false)
+                localStorage.setItem("admin", false)
                 localStorage.setItem("user", JSON.stringify(response.data.data))
-                return response.data.data;
+                return response.data;
+            }).catch((error) => {
+                error
             });
     };
-    const signup = (email, password) => {
+    const signup = (fullName, email, phone, dob, password) => {
         const data = {
+            name: fullName,
             email: email,
-            password: password
+            phone: phone,
+            birthday: dob,
+            password: password,
         }
 
         return signUp(data)
             .then((response) => {
                 setUser(response.data);
-                localStorage.setItem("user", response.data.data)
+                localStorage.setItem("user", JSON.stringify(response.data.data))
                 return response.data;
+            }).catch((error) => {
+                error
             });
     };
     const signout = () => {
@@ -66,6 +75,8 @@ function useProvideAuth() {
                 localStorage.setItem("user", JSON.stringify(response.data.data))
                 console.log(response.data)
                 return response.data;
+            }).catch((error) => {
+                error
             });
     };
     const adminsignup = (email, password) => {
@@ -80,7 +91,9 @@ function useProvideAuth() {
                 localStorage.setItem("user", response.data)
                 localStorage.setItem("admin", true)
                 setAdmin(true)
-                return response.data;
+                return response.data.catch((error) => {
+                    error
+                });
             });
     };
 

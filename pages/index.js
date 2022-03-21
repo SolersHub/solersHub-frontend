@@ -80,15 +80,15 @@ export default function Components(props) {
         }}
         {...rest}
       />
-      <Parallax image="/img/nextjs_header.jpg">
+      <Parallax image="/img/bg10.jpg">
         <div className={classes.container}>
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
                 <Fade>
-                  <h1 className={classes.title}>NextJS Material Kit.</h1>
-                  <h3 className={classes.subtitle}>
-                    A Badass Material Kit based on Material-UI and NextJS.
+                  <h1 className={classes.title}>Learning at your finger tip</h1>
+                  <h3 className={classes.subtitle} style={{ fontWeight: "500" }}>
+                    Get that "ready for anything" feeling with more than 1,000+ courses and Professional Certificates.
                   </h3>
                 </Fade>
 
@@ -98,7 +98,7 @@ export default function Components(props) {
         </div>
       </Parallax>
 
-      <div className={classNames(classes.main)} style={{ backgroundColor: pink }}>
+      <div className={classNames(classes.main)} style={{ backgroundColor: "white" }}>
         <div
           className={classes.containerFluid}
           style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "4%", paddingBottom: "4%" }}
@@ -335,7 +335,7 @@ export default function Components(props) {
             <div className="tc-pagination"></div>
           </div>
         </div>
-        <div className={classes.containerFluid} style={{ padding: "8% 8%", marginTop: "4%", marginBottom: "4%" }}>
+        <div className={classes.containerFluid} style={{ padding: "8% 8%", marginTop: "4%", marginBottom: "4%", backgroundColor: pink }}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.container}>
