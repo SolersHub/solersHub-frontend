@@ -126,8 +126,8 @@ function signup(props) {
 
 
 
-                            <Button onClick={handleLogin} style={{ padding: "10px 20px", width: "98%", backgroundColor: "black", color: "white", height: "48px", margin: "0 auto", display: "block" }}>Login</Button>
-                            <p style={{ fontSize: "14px" }}>By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy.</a> </p>
+                            <Button onClick={handleLogin} style={{ padding: "10px 20px", width: "98%", backgroundColor: "black", color: "white", height: "48px", margin: "10px auto", display: "block" }}>Login</Button>
+                            <p style={{ fontSize: "14px", textAlign: "center" }}>By signing up, you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy.</a> </p>
 
 
                         </div>
