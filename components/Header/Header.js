@@ -75,7 +75,7 @@ export default function Header(props) {
     [classes.fixed]: fixed,
   });
   const brandComponent = (
-    <Link href="/components" as="/components">
+    <Link href="/">
       <h3 style={{ fontWeight: "500", fontSize: "24px", color: "black" }}>Soners<span style={{ color: "#f4522c" }}>Hub</span></h3>
     </Link>
   );

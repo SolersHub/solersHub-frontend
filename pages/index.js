@@ -335,7 +335,7 @@ export default function Components(props) {
             <div className="tc-pagination"></div>
           </div>
         </div>
-        <div className={classes.containerFluid} style={{ padding: "8% 8%", marginTop: "4%", marginBottom: "4%", backgroundColor: pink }}>
+        <div className={classes.containerFluid} style={{ padding: "8% 8%", marginTop: "4%", marginBottom: "0%", backgroundColor: pink }}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.container}>

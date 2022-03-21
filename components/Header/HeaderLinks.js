@@ -39,6 +39,16 @@ export default function HeaderLinks(props) {
   return (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
+        <Button
+          href="#"
+          className={classes.navLink}
+          color="transparent"
+          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "transparent", color: "black", padding: "10px 18px" }}
+        >
+          Affiliate
+        </Button>
+      </ListItem>
+      <ListItem className={classes.listItem}>
         <CustomDropdown
           navDropdown
           buttonText="Categories"
