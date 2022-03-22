@@ -60,17 +60,17 @@ export default function search(props) {
                     className={classes.containerFluid}
                     style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "4%", paddingBottom: "4%", marginTop: "70px" }}
                 >
-                    <h3 style={{ fontWeight: "600", fontSize: "28px", color: "black" }}>5,890 results for “{q}”</h3>
+                    <h3 style={{ fontWeight: "600", fontSize: "28px", color: "black" }}><Skeleton variant="text" /></h3>
                     <div
                         className={classes.containerFluid}
                         style={{ paddingLeft: "2%", paddingRight: "2%", paddingTop: "2%", paddingBottom: "2%", marginTop: "20px" }}
                     >
                         <GridContainer>
-                            <GridItem sm={3}>
+                            <GridItem md={3}>
                                 <Skeleton variant="rect" width={210} height={118} />
                             </GridItem>
-                            <GridItem sm={9}>
-                                <Skeleton variant="text" width={310} />
+                            <GridItem md={9}>
+                                <Skeleton variant="text" width={260} />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" width={210} />
@@ -83,11 +83,11 @@ export default function search(props) {
                         style={{ paddingLeft: "2%", paddingRight: "2%", paddingTop: "2%", paddingBottom: "2%", marginTop: "20px" }}
                     >
                         <GridContainer>
-                            <GridItem sm={3}>
+                            <GridItem md={3}>
                                 <Skeleton variant="rect" width={210} height={118} />
                             </GridItem>
-                            <GridItem sm={9}>
-                                <Skeleton variant="text" width={310} />
+                            <GridItem md={9}>
+                                <Skeleton variant="text" width={260} />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" width={210} />
@@ -100,11 +100,11 @@ export default function search(props) {
                         style={{ paddingLeft: "2%", paddingRight: "2%", paddingTop: "2%", paddingBottom: "2%", marginTop: "20px" }}
                     >
                         <GridContainer>
-                            <GridItem sm={3}>
+                            <GridItem md={3}>
                                 <Skeleton variant="rect" width={210} height={118} />
                             </GridItem>
-                            <GridItem sm={9}>
-                                <Skeleton variant="text" width={310} />
+                            <GridItem md={9}>
+                                <Skeleton variant="text" width={260} />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" />
                                 <Skeleton variant="text" width={210} />
