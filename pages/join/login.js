@@ -78,7 +78,7 @@ function login(props) {
                 <div className={classes.containerFluid}
                     style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "8%", paddingBottom: "4%" }}>
                     <div className="loginBox" style={{ minWidth: "300px", maxWidth: "380px", margin: "8% auto" }}>
-                        <h3 style={{ margin: "10px auto", fontWeight: "500", fontSize: "16px", textAlign: "center" }}>Log In to Your Sonershub Account! </h3>
+                        <h3 style={{ margin: "10px auto", fontWeight: "500", fontSize: "16px", textAlign: "center" }}>Log In to Your Solershub Account! </h3>
                         <hr style={{ height: "0.01px", width: "95%", margin: "6px auto" }} />
                         <div className={classes.containerFluid} style={{ margin: "24px auto" }}>
                             <div style={{ width: "98%", margin: "10px auto", display: "flex", height: "48px", border: "1px solid black", paddingLeft: "20px" }}>

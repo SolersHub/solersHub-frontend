@@ -91,7 +91,7 @@ function signup(props) {
                 <div className={classes.containerFluid}
                     style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "8%", paddingBottom: "4%" }}>
                     <div className="loginBox" style={{ minWidth: "300px", maxWidth: "380px", margin: "4% auto" }}>
-                        <h3 style={{ margin: "10px auto", fontWeight: "500", fontSize: "24px", textAlign: "center" }}>Welcome to Sonershub </h3>
+                        <h3 style={{ margin: "10px auto", fontWeight: "500", fontSize: "24px", textAlign: "center" }}>Welcome to Solershub </h3>
                         <h3 style={{ margin: "10px auto", fontWeight: "400", fontSize: "16px", textAlign: "center" }}>Fill in your details to signUp</h3>
                         <hr style={{ height: "0.01px", width: "95%", margin: "6px auto" }} />
                         <div className={classes.containerFluid} style={{ margin: "24px auto" }}>

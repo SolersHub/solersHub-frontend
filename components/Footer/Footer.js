@@ -37,10 +37,10 @@ export default function Footer(props) {
         <GridItem md={3} style={{ textAlign: "left" }}>
           <div className={classes.containerFluid} >
             <Link href="/components" as="/components">
-              <h3 style={{ fontWeight: "500", fontSize: "24px", color: "white", marginBottom: "36px", marginTop: "20px" }}>Soners<span style={{ color: "#f4522c" }}>Hub</span></h3>
+              <h3 style={{ fontWeight: "500", fontSize: "24px", color: "white", marginBottom: "36px", marginTop: "20px" }}>Solers<span style={{ color: "#f4522c" }}>Hub</span></h3>
             </Link>
 
-            <a href="#" style={{ display: "block", marginBottom: "8px", color: "white", fontWeight: "400" }}>Teach on SonersHub</a>
+            <a href="#" style={{ display: "block", marginBottom: "8px", color: "white", fontWeight: "400" }}>Teach on SolersHub</a>
             <a href="#" style={{ display: "block", marginBottom: "8px", color: "white", fontWeight: "400" }}>About Us</a>
             <a href="#" style={{ display: "block", marginBottom: "8px", color: "white", fontWeight: "400" }}>Contact Us</a>
           </div>
@@ -75,7 +75,7 @@ export default function Footer(props) {
         </GridItem>
       </GridContainer>
       <div className={classes.containerFluid} style={{ display: "flex", justifyContent: "space-between", paddingTop: "3.5%" }}></div>
-      <p style={{ fontWeight: "400", color: "white", textAlign: "left" }}>Copyright © {year} SonersHub. All Rights Reserved.</p>
+      <p style={{ fontWeight: "400", color: "white", textAlign: "left" }}>Copyright © {year} SolersHub. All Rights Reserved.</p>
       <div></div>
     </div>
 

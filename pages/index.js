@@ -181,8 +181,8 @@ export default function Components(props) {
 
         </div>
         <div className={classes.containerFluid} style={{ overflow: "hidden", paddingLeft: "8%", paddingRight: "8%", paddingTop: "4%", paddingBottom: "4%", position: "relative" }}>
-          <h3 style={{ fontWeight: "600", fontSize: "32px", color: "black", textAlign: "center" }}>From the Sonershub community</h3>
-          <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>87+ million people are already learning on Sonershub</h3>
+          <h3 style={{ fontWeight: "600", fontSize: "32px", color: "black", textAlign: "center" }}>From the Solershub community</h3>
+          <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>87+ million people are already learning on Solershub</h3>
           <div className="testimonials-carousel-wrap" style={{ overflow: "hidden" }}>
             <div className="listing-carousel-button listing-carousel-button-next"><i className="fa fa-caret-right" style={{ color: "#fff" }}></i></div>
             <div className="listing-carousel-button listing-carousel-button-prev"><i className="fa fa-caret-left" style={{ color: "#fff" }}></i></div>

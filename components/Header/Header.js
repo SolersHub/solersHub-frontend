@@ -86,7 +86,7 @@ export default function Header(props) {
   });
   const brandComponent = (
     <Link href="/">
-      <h3 style={{ fontWeight: "500", fontSize: "24px", color: "black" }}>Soners<span style={{ color: "#f4522c" }}>Hub</span></h3>
+      <h3 style={{ fontWeight: "500", fontSize: "24px", color: "black" }}>Solers<span style={{ color: "#f4522c" }}>Hub</span></h3>
     </Link>
   );
   return (
