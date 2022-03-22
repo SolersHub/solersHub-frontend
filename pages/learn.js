@@ -13,18 +13,21 @@ import Hidden from "@material-ui/core/Hidden";
 
 const useStyles = makeStyles(styles);
 
-useEffect(() => {
-    if (localStorage.getItem("user") === "" && localStorage.getItem("admin") !== "true") {
-        Router.push("/join/login");
 
-    }
-
-}, [])
 
 
 function learn(props) {
+
     const classes = useStyles();
     const { ...rest } = props;
+
+    useEffect(() => {
+        if (localStorage.getItem("user") === "" && localStorage.getItem("admin") !== "true") {
+            Router.push("/join/login");
+
+        }
+
+    }, [])
     return (
         <div>
             <Header
