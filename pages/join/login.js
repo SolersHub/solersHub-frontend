@@ -30,7 +30,10 @@ function login(props) {
 
 
     useEffect(() => {
-        if (localStorage.getItem("user") !== "" && localStorage.getItem("admin") !== "true") {
+        const user = localStorage.getItem("user")
+        const admin = localStorage.getItem("admin")
+        if (user && admin === "false") {
+            const logged = user
             Router.push("/learn");
 
         }
