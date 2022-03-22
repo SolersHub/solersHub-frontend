@@ -15,6 +15,7 @@ import Drawer from "@material-ui/core/Drawer";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 import Search from "@material-ui/icons/Search";
+import Router from "next/router";
 // core components
 import styles from "styles/jss/nextjs-material-kit/components/headerStyle.js";
 
@@ -24,6 +25,7 @@ export default function Header(props) {
   const classes = useStyles();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [searchOpen, setSearchOpen] = React.useState(false);
+  const [query, setQuery] = React.useState("");
   React.useEffect(() => {
     if (props.changeColorOnScroll) {
       window.addEventListener("scroll", headerColorChange);
@@ -40,6 +42,14 @@ export default function Header(props) {
   const handleSearchToggle = () => {
     setSearchOpen(!searchOpen);
   };
+
+  function handleSearch(e) {
+    if (e.key === "Enter") {
+      Router.push(`/search?q=${query}`);
+
+    }
+
+  }
   const headerColorChange = () => {
     const { color, changeColorOnScroll } = props;
     const windowsScrollTop = window.pageYOffset;
@@ -65,7 +75,7 @@ export default function Header(props) {
     <div className={classes.containerFluid}>
       <div className={classes.flex} style={{ width: "90%", margin: "0 auto", borderRadius: "24px", height: "45px", border: "1px solid black", color: "black", padding: "10px 18px", display: "flex", backgroundColor: "#f7f1ea" }}>
         <Search />
-        <input placeholder="what do you want to learn?" type="text" style={{ width: "80%", height: "100%", border: "none", outline: "none", backgroundColor: "transparent" }} />
+        <input onChange={(e) => { setQuery(e.target.value) }} placeholder="what do you want to learn?" onKeyPress={handleSearch} type="text" style={{ width: "80%", height: "100%", border: "none", outline: "none", backgroundColor: "transparent" }} />
       </div>
     </div>);
   const appBarClasses = classNames({
