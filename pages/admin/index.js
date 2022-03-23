@@ -10,6 +10,7 @@ import GridContainer from "components/Grid/GridContainer.js";
 import Accordion from "components/Accordion/Accordion.js"
 import GridItem from "components/Grid/GridItem.js";
 import Slide from "@material-ui/core/Slide";
+import Skeleton from '@material-ui/lab/Skeleton';
 import Button from "components/CustomButtons/Button.js";
 import Hidden from "@material-ui/core/Hidden";
 import Footer from "components/Footer/Footer.js";
@@ -23,10 +24,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import Close from "@material-ui/icons/Close";
+import { getAllCoursesl } from "utils/helpers/courses/index"
 
 
 import style from "styles/jss/nextjs-material-kit/pages/componentsSections/javascriptStyles.js";
 import { black, gold, pink, white } from "styles/colors"
+import { getAllCourses } from '../../utils/helpers/courses';
 
 const useStyles = makeStyles(styles);
 const useStyle = makeStyles(style);
@@ -46,6 +49,8 @@ function index(props) {
     const [password, setPassword] = useState("")
     const [classicModal, setClassicModal] = React.useState(false);
     const [success, setSuccess] = useState(false)
+    const [data, setData] = useState({})
+    const [courses, setCourses] = useState([])
 
 
 
@@ -53,7 +58,13 @@ function index(props) {
         if (localStorage.getItem("user") == "" && localStorage.getItem("admin") !== true) {
             Router.push("/");
 
+        } else {
+            setData(JSON.parse(localStorage.getItem("user")).user._id)
+            getAllCourses().then((response) => {
+                setCourses(response.data.data.courses)
+            })
         }
+
 
     }, [])
 
@@ -70,79 +81,72 @@ function index(props) {
                 }}
                 {...rest}
             />
-            <Dialog
-                classes={{
-                    root: classe.center,
-                    paper: classe.modal,
-                }}
-                open={classicModal}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={() => setClassicModal(false)}
-                aria-labelledby="classic-modal-slide-title"
-                aria-describedby="classic-modal-slide-description"
-                maxWidth={"md"}
-            >
-                <DialogTitle
-                    id="classic-modal-slide-title"
-                    disableTypography
-                    className={classe.modalHeader}
-                >
-                    <IconButton
-                        className={classe.modalCloseButton}
-                        key="close"
-                        aria-label="Close"
-                        color="inherit"
-                        onClick={() => setClassicModal(false)}
-                    >
-                        <Close className={classe.modalClose} />
-                    </IconButton>
-                    <h4 className={classe.modalTitle}>Modal title</h4>
-                </DialogTitle>
-                <DialogContent
-                    id="classic-modal-slide-description"
-                    className={classe.modalBody}
-                >
-                    <p>
-                        Far far away, behind the word mountains, far from the
-                        countries Vokalia and Consonantia, there live the blind
-                        texts. Separated they live in Bookmarksgrove right at the
-                        coast of the Semantics, a large language ocean. A small
-                        river named Duden flows by their place and supplies it
-                        with the necessary regelialia. It is a paradisematic
-                        country, in which roasted parts of sentences fly into your
-                        mouth. Even the all-powerful Pointing has no control about
-                        the blind texts it is an almost unorthographic life One
-                        day however a small line of blind text by the name of
-                        Lorem Ipsum decided to leave for the far World of Grammar.
-                    </p>
-                </DialogContent>
-                <DialogActions className={classe.modalFooter}>
-                    <Button color="transparent" simple>
-                        Nice Button
-                    </Button>
-                    <Button
-                        onClick={() => setClassicModal(false)}
-                        color="danger"
-                        simple
-                    >
-                        Close
-                    </Button>
-                </DialogActions>
-            </Dialog>
+
             <div className={classes.main} style={{ backgroundColor: pink }}>
                 <div className={classes.containerFluid} style={{ padding: "100px 8%", marginTop: "50px" }}>
-                    <GridContainer>
-                        <GridItem xs={12} sm={12} md={8}>
-                            <div className={classes.containerFluid}>
-                                <h3>My courses</h3>
-                                <Accordion />
-                                <Accordion />
+                    {courses.filter(item => item.owner.toLowerCase().includes(data) && item.status === "inactive").map(item =>
+                        <div key={item._id} className={classes.containerFluid} style={{ backgroundColor: "white", paddingLeft: "0px", boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)", marginBottom: "25px" }}>
 
-                            </div>
 
-                        </GridItem>
-                    </GridContainer>
+                            <GridContainer>
+                                <GridItem md={2}>
+                                    <div className={classes.containerFluid} style={{ paddingLeft: "0px", paddingRight: "0px" }}>
+                                        <img src="/img/placeholder.jpg" style={{ width: "100%", height: "auto" }} />
+                                    </div>
+
+                                </GridItem>
+                                <GridItem md={3} style={{ paddingTop: "3%" }}>
+                                    <div className={classes.containerFluid} >
+                                        <h3 style={{ fontWeight: "500" }}>{item.name}</h3> <Skeleton variant="text" />
+                                        <h4 style={{ fontWeight: "400" }}>Draft</h4>
+                                    </div>
+
+                                </GridItem>
+                                <GridItem md={7} style={{ paddingTop: "3%" }}>
+                                    <div className={classes.containerFluid}>
+                                        <h3 style={{ fontWeight: "500" }}>Finish your course</h3>
+                                        <Skeleton variant="text" />
+                                        <a
+                                            href={`/admin/courses/${item._id}/manage`}
+                                            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", color: "black", marginTop: "20px" }}
+                                        >
+                                            Edit
+                                        </a>
+                                    </div>
+
+                                </GridItem>
+                            </GridContainer>
+
+                        </div>)}
+
+                    <div className={classes.containerFluid} style={{ backgroundColor: "white", paddingLeft: "0px", marginTop: "25px", boxShadow: "0 3px 10px rgb(0 0 0 / 0.2)" }}>
+                        <GridContainer>
+                            <GridItem md={5}>
+                                <div className={classes.containerFluid} style={{ display: "block", margin: "auto auto" }}>
+                                    <img src="/img/engaging-course.jpg" style={{ height: "auto" }} />
+                                </div>
+
+                            </GridItem>
+
+                            <GridItem md={7} style={{ paddingTop: "3%" }}>
+                                <div className={classes.containerFluid} >
+                                    <h3 style={{ fontWeight: "500" }}>Create a course</h3>
+                                    <Skeleton variant="text" />
+                                    <Button
+                                        href="#"
+                                        className={classes.navLink}
+                                        onClick={() => { }}
+                                        style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black", padding: "10px 18px", marginTop: "30px" }}
+                                    >
+                                        create
+                                    </Button>
+                                </div>
+
+                            </GridItem>
+                        </GridContainer>
+
+                    </div>
+
 
                 </div>
 

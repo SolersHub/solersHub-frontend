@@ -12,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Hidden from "@material-ui/core/Hidden";
 import Drawer from "@material-ui/core/Drawer";
+import Popper from "components/Popper.js"
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 import Search from "@material-ui/icons/Search";
@@ -91,7 +92,7 @@ export default function Header(props) {
   );
   return (
     <AppBar className={appBarClasses}>
-      <Toolbar className={classes.containerFluid} style={{ paddingLeft: '8%', paddingRight: '8%' }}>
+      <Toolbar className={classes.containerFluid} style={{ paddingLeft: '8%', paddingRight: '8%', position: "relative" }}>
         {leftLinks !== undefined ? brandComponent : null}
         <div className={classes.flex}>
           {leftLinks !== undefined ? (
@@ -108,6 +109,7 @@ export default function Header(props) {
         <Hidden smDown implementation="css">
           {rightLinks}
         </Hidden>
+
         <Hidden mdUp>
           <IconButton
             color="inherit"

@@ -14,6 +14,9 @@ import { Apps, CloudDownload } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 import { useAuth } from "utils/hooks/useAuth"
+import Hidden from "@material-ui/core/Hidden";
+import Drawer from "@material-ui/core/Drawer";
+import Popper from "components/Popper.js"
 
 // core components
 import CustomDropdown from "components/CustomDropdown/CustomDropdown.js";
@@ -43,7 +46,7 @@ export default function HeaderLinks(props) {
           href="#"
           className={classes.navLink}
           color="transparent"
-          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "transparent", color: "black", padding: "10px 18px" }}
+          style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "transparent", color: "black", padding: "12px 18px" }}
         >
           Affiliate
         </Button>
@@ -83,18 +86,15 @@ export default function HeaderLinks(props) {
         </Button>
       </ListItem> : (<></>)}
       {auth.user ? (<>
-
-        <ListItem className={classes.listItem}>
-          <Button
-            href="/join/login"
-            className={classes.navLink}
-            onClick={() => { auth.signout() }}
-            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
-          >
-            Sign Out
-          </Button>
+        {admin == true ? <> <ListItem className={classes.listItem}>
+          <Popper />
         </ListItem>
+
+        </> : <></>}
+
+
       </>) : <>
+
         <ListItem className={classes.listItem}>
           <Button
             href="/join/login"
