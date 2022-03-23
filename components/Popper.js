@@ -17,6 +17,7 @@ import Popper from "@material-ui/core/Popper";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { MenuBookOutlined, MoreVert } from '@material-ui/icons';
+import { useAuth } from "utils/hooks/useAuth"
 
 // core components
 import Button from "components/CustomButtons/Button.js";
@@ -27,6 +28,7 @@ const useStyles = makeStyles(styles);
 
 export default function CustomDropdown(props) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const auth = useAuth();
     const handleClick = (event) => {
         if (anchorEl && anchorEl.contains(event.target)) {
             setAnchorEl(null);
@@ -190,7 +192,7 @@ export default function CustomDropdown(props) {
                                                     <Button
                                                         href="/join/login"
                                                         className={classes.navLink}
-                                                        //   onClick={() => { auth.signout() }}
+                                                        onClick={() => { auth.signout() }}
                                                         style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
                                                     >
                                                         Sign Out

@@ -5,7 +5,7 @@ const baseUrl = `https://solershub-backend.herokuapp.com/api/v1/`;
 
 const http = axios.create({
     baseURL: baseUrl,
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", "Accept": "*/*", },
 });
 
 http.interceptors.request.use(
