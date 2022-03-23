@@ -81,7 +81,7 @@ export default function Components(props) {
         {...rest}
       />
       <Parallax image="/img/bg10.jpg">
-        <div className={classes.container}>
+        <div className={classes.containerFluid} style={{ paddingLeft: "8%", paddingRight: "8%", backgroundColor: "rgba(0, 0, 0, 0.3)" }}>
           <GridContainer>
             <GridItem>
               <div className={classes.brand}>
