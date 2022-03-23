@@ -118,7 +118,7 @@ export default function searchquery(props) {
                                         <GridContainer>
                                             <GridItem md={6} >
                                                 <div className={classes.containerFluid}>
-                                                    <img src={image ? image : "/img/placeholder2.jpg"} style={{ width: "100%", height: "auto" }} />
+                                                    <img src={item.image ? `https://solershub-backend.herokuapp.com/${item.image}` : "/img/placeholder2.jpg"} style={{ width: "100%", height: "auto" }} />
 
                                                 </div>
 
