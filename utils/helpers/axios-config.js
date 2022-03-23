@@ -12,7 +12,7 @@ http.interceptors.request.use(
     function (config) {
         if (localStorage.getItem(tokenName)) {
             const token = localStorage.getItem(tokenName);
-            config.headers.Authorization = `${token}`;
+            config.headers.Authorization = `Bearer ${token}`;
         }
         // console.log(config);
         return config;
