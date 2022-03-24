@@ -20,3 +20,15 @@ export const addImage = async (id, body) => {
         }
     })
 }
+
+export const addSection = async (id, body) => {
+    return await http.patch(`/instructors/courses/${id}/section/add`, body)
+}
+
+export const deleteSection = async (id, sid) => {
+    return await http.delete(`/instructors/courses/${id}/section/remove/${sid}`)
+}
+
+export const updateSection = async (id, sid, body) => {
+    return await http.patch(`/instructors/courses/${id}/section/update/${sid}`, body)
+}
