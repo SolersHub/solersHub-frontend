@@ -21,7 +21,7 @@ import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 import { Fade } from "react-awesome-reveal";
 import { search } from "utils/helpers/search/index"
-import { getOne, addImage } from "utils/helpers/courses"
+import { getOne, addImage, updateCourse } from "utils/helpers/courses"
 import { Apps, CloudDownload, Delete, Edit } from "@material-ui/icons";
 // sections for this page
 
@@ -45,14 +45,42 @@ export default function searchquery(props) {
     React.useEffect(() => {
 
         setLoading(false)
+        getCourse()
+
+
+
+    }, [id])
+
+    function getCourse() {
         getOne(id).then((response) => {
             setData(response.data.data.course)
             setLoading(false)
             console.log(response.data.data.course)
         })
+    }
 
+    function update() {
+        const body = {
+            name: "Learn Python the hard way",
+            price: 150,
+            categories: "python, programming, hard",
+            description: "",
+            status: "active"
+        }
+        updateCourse(id, body).then((response) => {
+            toast.success("removed successfully")
+            getCourse()
+            console.log(response.data)
+            // if (response.data.status == "success") {
+            //     toast.success("removed successfully")
+            //     getCourse()
+            // }
 
-    }, [id])
+        }).catch((error) => {
+            toast.error("something went wrong. try again")
+        })
+
+    }
 
     const uploadImage = (event) => {
         setLoading(true)
@@ -70,14 +98,11 @@ export default function searchquery(props) {
             console.log(response.data)
         })
 
-
-
-
-
     };
 
     return (
         <div>
+            <Toaster />
             <Header
                 brand="NextJS Material Kit"
                 rightLinks={<HeaderLinks />}

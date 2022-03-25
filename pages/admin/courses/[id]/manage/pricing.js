@@ -22,7 +22,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import { Fade } from "react-awesome-reveal";
 import { search } from "utils/helpers/search/index"
 import { getOne, addImage, addSection, updateSection, deleteSection } from "utils/helpers/courses"
-import { Apps, CloudDownload, Delete, Edit, Movie, TextFields } from "@material-ui/icons";
+import { Apps, CloudDownload, Delete, Edit } from "@material-ui/icons";
 import IconButton from '@material-ui/core/IconButton';
 // sections for this page
 
@@ -44,9 +44,7 @@ export default function searchquery(props) {
     const [add, setAdd] = React.useState(false)
     const [sectionName, setSectionName] = React.useState("")
     const [edit, setEdit] = React.useState("")
-    const [show, setShow] = React.useState(false);
-    const [content, setContent] = React.useState("")
-    const [addC, setAddC] = React.useState(false)
+    const [show, setShow] = React.useState(false)
 
     React.useEffect(() => {
         getCourse()
@@ -94,25 +92,6 @@ export default function searchquery(props) {
             if (response.data.status == "success") {
                 toast.success("section added successfully")
                 setAdd(false)
-                getCourse()
-            }
-
-        }).catch((error) => {
-            toast.error("something went wrong. try again")
-        })
-    }
-    function updateSections(e) {
-        const sid = e.currentTarget.value
-
-        const body = {
-            name: sectionName,
-        }
-        updateSection(id, sid, body).then((response) => {
-            console.log(response.data)
-            if (response.data.status == "success") {
-                toast.success("section added successfully")
-                setAdd(false)
-                setShow(!show)
                 getCourse()
             }
 
@@ -195,30 +174,14 @@ export default function searchquery(props) {
 
                                         <div className={classes.container} style={{ backgroundColor: "white", border: "1px solid black", padding: "0px 0px", }}>
                                             {edit === item._id && show === true ? <div className={classes.containerFluid} style={{ padding: "4px 20px", marginTop: "10px" }}>
-                                                <input defaultValue={item.name} onChange={(e) => { setSectionName(e.target.value) }} type="text" style={{ width: "100%", border: "1px solid black", height: "50px", padding: "10px 20px" }} />
-                                                <Button onClick={updateSections} value={item._id} style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black", marginTop: "20px" }}>save</Button>
-                                            </div> : <>
-                                                <div className={classes.containerFluid} style={{ padding: "4px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid black" }}>
-                                                    <h3> Lecture {(data.findIndex(object => {
-                                                        return object._id === item._id;
-                                                    })) + 1}</h3>
-                                                    <Button onClick={() => { setContent(item._id); setAddC(true) }} style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black" }}>+ Content</Button>
-                                                </div>
-                                                {content === item._id && addC === true ? <div className={classes.containerFluid}>
-                                                    <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>Choose Content Type</h3>
-                                                    <div className={classes.container} style={{ marginBottom: "20px", display: "flex", justifyContent: "space-around" }}>
-                                                        <div style={{ width: "80px", height: "80px", backgroundColor: pink, display: "block", justifyContent: "center", paddingTop: "4px", border: "1px solid black" }}>
-                                                            <Movie style={{ margin: "5px auto 5px auto", display: "block", }} />
-                                                            <h4 style={{ fontWeight: "500", textAlign: "center" }}>Video</h4>
-                                                        </div>
-                                                        <div style={{ width: "80px", height: "80px", backgroundColor: pink, display: "block", justifyContent: "center", paddingTop: "4px", border: "1px solid black" }}>
-                                                            <TextFields style={{ margin: "5px auto 5px auto", display: "block", }} />
-                                                            <h4 style={{ fontWeight: "500", textAlign: "center" }}>Text</h4>
-                                                        </div>
-                                                    </div>
-                                                </div> : <></>}
-
-                                            </>}
+                                                <input value={item.name} onChange={(e) => { setSectionName(e.target.value) }} type="text" style={{ width: "100%", border: "1px solid black", height: "50px", padding: "10px 20px" }} />
+                                                <Button onClick={addSections} style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black", marginTop: "20px" }}>save</Button>
+                                            </div> : <div className={classes.containerFluid} style={{ padding: "4px 20px", display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid black" }}>
+                                                <h3> Lecture {(data.findIndex(object => {
+                                                    return object._id === item._id;
+                                                })) + 1}</h3>
+                                                <Button style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black" }}>+ Content</Button>
+                                            </div>}
 
 
 
@@ -236,7 +199,6 @@ export default function searchquery(props) {
                                                     <h3> Lecture 1</h3>
                                                     <Button style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black" }}>+ Content</Button>
                                                 </div>
-
 
 
                                             </div>

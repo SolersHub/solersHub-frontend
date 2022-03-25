@@ -13,6 +13,10 @@ export const getOne = async (id) => {
     return await http.get(`/courses/single/${id}`)
 }
 
+export const updateCourse = async (id, body) => {
+    return await http.patch(`/instructors/courses/update/${id}`, body)
+}
+
 export const addImage = async (id, body) => {
     return await http.patch(`/instructors/courses/${id}/image/upload`, body, {
         headers: {
