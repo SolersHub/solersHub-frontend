@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Header from "components/Header/Header.js";
 import HeaderLinks from "components/Header/HeaderLinks.js";
 import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast"
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
@@ -47,25 +48,30 @@ function login(props) {
                 localStorage.setItem("token", response.token)
                 setSuccess(true)
                 Router.push("/admin");
+                toast.success("logged in successfully")
 
             }
 
+        }).catch((error) => {
+            toast.error("something went wrong. try again")
         })
     }
 
 
     return (
-        <div><Header
-            brand="NextJS Material Kit"
-            rightLinks={<HeaderLinks />}
-            fixed
-            color="white"
-            changeColorOnScroll={{
-                height: 400,
-                color: "white",
-            }}
-            {...rest}
-        />
+        <div>
+            <Toaster />
+            <Header
+                brand="NextJS Material Kit"
+                rightLinks={<HeaderLinks />}
+                fixed
+                color="white"
+                changeColorOnScroll={{
+                    height: 400,
+                    color: "white",
+                }}
+                {...rest}
+            />
             <div className={classes.main}>
                 <div className={classes.containerFluid}
                     style={{ paddingLeft: "8%", paddingRight: "8%", paddingTop: "8%", paddingBottom: "4%" }}>
