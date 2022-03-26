@@ -152,7 +152,9 @@ export default function searchquery(props) {
                 Authorization: `AWS AKIA2P4DP5VED7Y4HKF6:lNT9tdvSLvccy1gpvfDo4Je3elDz97L0zPkTPl+i`,
                 'X-Custom-Header': 'header value',
                 Accept: "*/*",
-                Date: new Date().toISOString()
+                "Date": new Date().toUTCString(),
+                "X-Amz-Date": new Date().toUTCString(),
+                " x-amz-meta-tag": "",
             },
             body: formData,
             method: "PUT"
