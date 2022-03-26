@@ -1,6 +1,7 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
+import S3 from "react-aws-s3"
 // react components for routing our app without refresh
 import Link from "next/link";
 // @material-ui/core components
@@ -22,7 +23,7 @@ import Parallax from "components/Parallax/Parallax.js";
 import { Fade } from "react-awesome-reveal";
 import { search } from "utils/helpers/search/index"
 import { getOne, addImage, addSection, updateSection, deleteSection } from "utils/helpers/courses"
-import { Apps, CloudDownload, Delete, Edit, Movie, TextFields } from "@material-ui/icons";
+import { Apps, CloudDownload, Delete, Edit, FlashOffTwoTone, Movie, TextFields } from "@material-ui/icons";
 import IconButton from '@material-ui/core/IconButton';
 // sections for this page
 
@@ -47,7 +48,8 @@ export default function searchquery(props) {
     const [show, setShow] = React.useState(false);
     const [content, setContent] = React.useState("")
     const [addC, setAddC] = React.useState(false)
-
+    const [video, setVideo] = React.useState(false)
+    const [text, setText] = React.useState(false)
     React.useEffect(() => {
         getCourse()
 
@@ -119,6 +121,43 @@ export default function searchquery(props) {
         }).catch((error) => {
             toast.error("something went wrong. try again")
         })
+    }
+
+    function uploadVideo(e) {
+        const file = e.currentTarget.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+        const config = {
+            bucketName: "solershubfiles",
+            dirName: "" /* optional */,
+            region: "us-east-1",
+            accessKeyId: "AKIA2P4DP5VED7Y4HKF6",
+            secretAccessKey: "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",
+        };
+        const ReactS3Client = new S3(config);
+        // ReactS3Client.uploadFile(file, id).then((data) => {
+        //     console.log(data);
+        //     if (data.status === 204) {
+        //         console.log("success");
+        //     } else {
+        //         console.log("fail");
+        //     }
+        // }).catch((error) => {
+        //     console.log(error)
+        // });
+
+        fetch('https://solershubfiles.s3-us-east-1.amazonaws.com/', {
+            headers: {
+                Accept: 'application/json',
+                Authentication: `AWS AKIA2P4DP5VED7Y4HKF6: lNT9tdvSLvccy1gpvfDo4Je3elDz97L0zPkTPl+i`,
+                'X-Custom-Header': 'header value',
+                Accept: "*/*",
+            },
+            body: formData,
+            method: "PUT"
+        })
+            .then(resp => resp.json())
+            .then(json => console.log(json))
     }
 
     return (
@@ -207,7 +246,7 @@ export default function searchquery(props) {
                                                 {content === item._id && addC === true ? <div className={classes.containerFluid}>
                                                     <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>Choose Content Type</h3>
                                                     <div className={classes.container} style={{ marginBottom: "20px", display: "flex", justifyContent: "space-around" }}>
-                                                        <div style={{ width: "80px", height: "80px", backgroundColor: pink, display: "block", justifyContent: "center", paddingTop: "4px", border: "1px solid black" }}>
+                                                        <div onClick={() => { setContent(item._id); setVideo(true); setAddC(false) }} style={{ width: "80px", height: "80px", backgroundColor: pink, display: "block", justifyContent: "center", paddingTop: "4px", border: "1px solid black", cursor: "pointer" }}>
                                                             <Movie style={{ margin: "5px auto 5px auto", display: "block", }} />
                                                             <h4 style={{ fontWeight: "500", textAlign: "center" }}>Video</h4>
                                                         </div>
@@ -215,7 +254,22 @@ export default function searchquery(props) {
                                                             <TextFields style={{ margin: "5px auto 5px auto", display: "block", }} />
                                                             <h4 style={{ fontWeight: "500", textAlign: "center" }}>Text</h4>
                                                         </div>
+
                                                     </div>
+                                                    <h3 onClick={() => { setContent(""); setAddC(false) }} style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "right", cursor: "pointer", marginBottom: "20px" }}>close</h3>
+                                                </div> : <></>}
+                                                {content === item._id && video === true ? <div className={classes.containerFluid}>
+                                                    <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>Choose Content Type</h3>
+                                                    <div className={classes.container} style={{ marginBottom: "20px", display: "flex", justifyContent: "space-around" }}>
+                                                        <div className="custom-file-upload" style={{ width: "100%", border: "1px solid black", height: "50px", display: "flex", marginRight: "0px", justifyContent: "space-between" }}>
+                                                            <input htmlFor="file" type="text" disabled className="file-upload-input" style={{ height: "100%", border: "none", width: "60%", padding: "12px 20px", cursor: "pointer" }} />
+                                                            <label htmlFor="file" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "12px 20px", height: "100%", color: "black", cursor: "pointer" }}>Select a File</label>
+
+
+                                                        </div>
+                                                        <input onChange={uploadVideo} id="file" className="custom-file-upload-hidden" type="file" style={{ display: "none" }} />
+                                                    </div>
+                                                    <h3 onClick={() => { setContent(""); setAddC(false) }} style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "right", cursor: "pointer", marginBottom: "20px" }}>close</h3>
                                                 </div> : <></>}
 
                                             </>}
