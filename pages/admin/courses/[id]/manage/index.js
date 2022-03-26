@@ -3,6 +3,7 @@ import React from "react";
 import classNames from "classnames";
 // react components for routing our app without refresh
 import Link from "next/link";
+import AWS from 'aws-sdk'
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Swiper from "swiper/swiper-bundle"
@@ -30,6 +31,21 @@ import Router, { useRouter } from "next/router";
 import { black, gold, pink, white } from "styles/colors"
 
 
+const S3_BUCKET = 'solershubfiles';
+const REGION = 'us-east-1';
+
+
+AWS.config.update({
+    accessKeyId: 'AKIA2P4DP5VED7Y4HKF6',
+    secretAccessKey: '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'
+})
+
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+})
+
+
 const useStyles = makeStyles(styles);
 
 export default function searchquery(props) {
@@ -40,6 +56,7 @@ export default function searchquery(props) {
     const [data, setData] = React.useState({})
     const [loading, setLoading] = React.useState(false)
     const [image, setImage] = React.useState({})
+    const [progress, setProgress] = React.useState(0);
 
 
     React.useEffect(() => {
@@ -87,18 +104,39 @@ export default function searchquery(props) {
 
         const file = event.target.files[0];
         setImage(event.target.files[0]);
-        const formData = new FormData();
-        formData.append("image", file, "backdrop.jpg");
+        const params = {
+            ACL: 'public-read',
+            Body: file,
+            Bucket: S3_BUCKET,
+            Key: `${id}${file.name}`
+        };
+
+        myBucket.putObject(params)
+            .on('httpUploadProgress', (evt) => {
+                setProgress(Math.round((evt.loaded / evt.total) * 100))
+            }).on('success', function (response) {
+                console.log("Key was", response.request.params.Key)
+                uploadFile(response.request.params.Key)
+            }).send((err) => {
+                if (err) console.log(err)
+            })
         console.log(file)
-        console.log(formData)
-        addImage(id, formData).then((response) => {
+
+    };
+
+    function uploadFile(ImId) {
+        const body = {
+            imageURL: `https://solershubfiles.s3.amazonaws.com/${ImId}`,
+        }
+        addImage(id, body).then((response) => {
             if (response.data.status == "success") {
                 setLoading(false)
+                getCourse()
             }
             console.log(response.data)
         })
 
-    };
+    }
 
     return (
         <div>
@@ -172,7 +210,7 @@ export default function searchquery(props) {
                                         <GridContainer>
                                             <GridItem md={6} >
                                                 <div className={classes.containerFluid}>
-                                                    <img src={data.image ? `https://solershub-backend.herokuapp.com/${data.image}` : "/img/placeholder2.jpg"} style={{ width: "100%", height: "auto" }} />
+                                                    <img src={data.image ? `${data.image}` : "/img/placeholder2.jpg"} style={{ width: "100%", height: "auto" }} />
 
                                                 </div>
 

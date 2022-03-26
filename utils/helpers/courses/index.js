@@ -16,13 +16,12 @@ export const getOne = async (id) => {
 export const updateCourse = async (id, body) => {
     return await http.patch(`/instructors/courses/update/${id}`, body)
 }
+export const publishCourse = async (id, body) => {
+    return await http.patch(`/instructors/courses/publish/${id}`)
+}
 
 export const addImage = async (id, body) => {
-    return await http.patch(`/instructors/courses/${id}/image/upload`, body, {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    })
+    return await http.patch(`/instructors/courses/${id}/image/upload`, body)
 }
 
 export const addSection = async (id, body) => {
@@ -36,3 +35,9 @@ export const deleteSection = async (id, sid) => {
 export const updateSection = async (id, sid, body) => {
     return await http.patch(`/instructors/courses/${id}/section/update/${sid}`, body)
 }
+
+
+export const sectionVideo = async (id, sid, body) => {
+    return await http.patch(`/instructors/courses/${id}/section/video/add/${sid}`, body)
+}
+

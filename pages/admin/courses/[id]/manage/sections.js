@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import S3 from "react-aws-s3"
+import S3 from "utils/aws"
+import AWS from 'aws-sdk'
 // react components for routing our app without refresh
 import Link from "next/link";
 // @material-ui/core components
@@ -22,7 +23,7 @@ import Button from "components/CustomButtons/Button.js";
 import Parallax from "components/Parallax/Parallax.js";
 import { Fade } from "react-awesome-reveal";
 import { search } from "utils/helpers/search/index"
-import { getOne, addImage, addSection, updateSection, deleteSection } from "utils/helpers/courses"
+import { getOne, addImage, addSection, updateSection, deleteSection, sectionVideo, publishCourse, } from "utils/helpers/courses"
 import { Apps, CloudDownload, Delete, Edit, FlashOffTwoTone, Movie, TextFields } from "@material-ui/icons";
 import IconButton from '@material-ui/core/IconButton';
 // sections for this page
@@ -30,6 +31,20 @@ import IconButton from '@material-ui/core/IconButton';
 import styles from "styles/jss/nextjs-material-kit/pages/components.js";
 import Router, { useRouter } from "next/router";
 import { black, gold, pink, white } from "styles/colors"
+
+const S3_BUCKET = 'solershubfiles';
+const REGION = 'us-east-1';
+
+
+AWS.config.update({
+    accessKeyId: 'AKIA2P4DP5VED7Y4HKF6',
+    secretAccessKey: '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'
+})
+
+const myBucket = new AWS.S3({
+    params: { Bucket: S3_BUCKET },
+    region: REGION,
+})
 
 
 const useStyles = makeStyles(styles);
@@ -50,6 +65,9 @@ export default function searchquery(props) {
     const [addC, setAddC] = React.useState(false)
     const [video, setVideo] = React.useState(false)
     const [text, setText] = React.useState(false)
+    const [progress, setProgress] = useState(0);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [vid, setVid] = React.useState("");
     React.useEffect(() => {
         getCourse()
 
@@ -83,6 +101,21 @@ export default function searchquery(props) {
             toast.error("something went wrong. try again")
         })
 
+    }
+
+    function publish() {
+        publishCourse(id).then((response) => {
+            toast.success("removed successfully")
+            Router.push("/admin")
+            console.log(response.data)
+            // if (response.data.status == "success") {
+            //     toast.success("removed successfully")
+            //     getCourse()
+            // }
+
+        }).catch((error) => {
+            toast.error("something went wrong. try again")
+        })
     }
 
     function addSections() {
@@ -123,44 +156,52 @@ export default function searchquery(props) {
         })
     }
 
+    function addSectionVid() {
+        const body = {
+            "videoText": "Seven",
+            "videoTitle": "Welcome to the course!",
+            "videoURL": `https://solershubfiles.s3.amazonaws.com/${vid}`,
+            "index": 0
+        }
+        sectionVideo(id, content, body).then((response) => {
+            console.log(response.data)
+            if (response.data.status == "success") {
+                toast.success("section added successfully")
+                setAdd(false)
+                setContent("");
+                setAddC(false)
+                getCourse()
+            }
+
+        }).catch((error) => {
+            toast.error("something went wrong. try again")
+        })
+    }
+
     function uploadVideo(e) {
         const file = e.currentTarget.files[0];
+        setLoading(true)
+        setImage(file)
         const formData = new FormData();
         formData.append("image", file);
-        const config = {
-            bucketName: "solershubfiles",
-            dirName: "" /* optional */,
-            region: "us-east-1",
-            accessKeyId: "AKIA2P4DP5VED7Y4HKF6",
-            secretAccessKey: "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",
+        const params = {
+            ACL: 'public-read',
+            Body: file,
+            Bucket: S3_BUCKET,
+            Key: `${content}${file.name}`
         };
-        const ReactS3Client = new S3(config);
-        // ReactS3Client.uploadFile(file, id).then((data) => {
-        //     console.log(data);
-        //     if (data.status === 204) {
-        //         console.log("success");
-        //     } else {
-        //         console.log("fail");
-        //     }
-        // }).catch((error) => {
-        //     console.log(error)
-        // });
 
-        fetch('https://solershubfiles.s3.us-east-1.amazonaws.com/', {
-            headers: {
-                Accept: 'application/json',
-                Authorization: `AWS AKIA2P4DP5VED7Y4HKF6:lNT9tdvSLvccy1gpvfDo4Je3elDz97L0zPkTPl+i`,
-                'X-Custom-Header': 'header value',
-                Accept: "*/*",
-                "Date": new Date().toUTCString(),
-                "X-Amz-Date": new Date().toUTCString(),
-                " x-amz-meta-tag": "",
-            },
-            body: formData,
-            method: "PUT"
-        })
-            .then(resp => resp.json())
-            .then(json => console.log(json))
+        myBucket.putObject(params)
+            .on('httpUploadProgress', (evt) => {
+                setProgress(Math.round((evt.loaded / evt.total) * 100))
+            }).on('success', function (response) {
+                console.log("Key was", response.request.params.Key)
+                setVid(response.request.params.Key)
+            }).send((err) => {
+                if (err) console.log(err)
+            })
+
+
     }
 
     return (
@@ -207,6 +248,16 @@ export default function searchquery(props) {
                                     <ListItem style={{}}>Add Sections
                                     </ListItem>
                                 </List>
+                                <List>
+                                    <Button
+                                        onClick={publish}
+                                        style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
+                                    >
+                                        Publish
+                                    </Button>
+                                </List>
+
+
                             </div>
 
 
@@ -244,7 +295,7 @@ export default function searchquery(props) {
                                                     <h3> Lecture {(data.findIndex(object => {
                                                         return object._id === item._id;
                                                     })) + 1}</h3>
-                                                    <Button onClick={() => { setContent(item._id); setAddC(true) }} style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black" }}>+ Content</Button>
+                                                    <Button onClick={() => { setContent(item._id); setAddC(true); setVideo(false); }} style={{ padding: "12px 20px", backgroundColor: "#ffe6bc", border: "1px solid black", color: "black" }}>+ Content</Button>
                                                 </div>
                                                 {content === item._id && addC === true ? <div className={classes.containerFluid}>
                                                     <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>Choose Content Type</h3>
@@ -260,19 +311,35 @@ export default function searchquery(props) {
 
                                                     </div>
                                                     <h3 onClick={() => { setContent(""); setAddC(false) }} style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "right", cursor: "pointer", marginBottom: "20px" }}>close</h3>
-                                                </div> : <></>}
+                                                </div> :
+                                                    <>
+                                                        {item.sub.map(items => <div className={classes.container} key={items.date}>
+                                                            {items.type === "video" ? <div style={{ display: "flex", alignItems: "center" }}><h3 style={{ fontWeight: "500", fontSize: "16px", color: "black" }}>{(items.index + 1)}.</h3> <Movie style={{ marginRight: "5px", display: "block", marginBottom: "-3px" }} /><h3 style={{ fontWeight: "500", fontSize: "16px", color: "black" }}>  {items.videoTitle}</h3></div> : ""}
+                                                        </div>)}
+
+                                                    </>}
                                                 {content === item._id && video === true ? <div className={classes.containerFluid}>
                                                     <h3 style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "center" }}>Choose Content Type</h3>
-                                                    <div className={classes.container} style={{ marginBottom: "20px", display: "flex", justifyContent: "space-around" }}>
+                                                    <div className={classes.container} style={{ marginBottom: "20px", }}>
+                                                        <input type="text" placeholder="Title" style={{ width: "100%", border: "1px solid black", height: "45px", padding: "10px 20px", marginBottom: "20px" }} />
                                                         <div className="custom-file-upload" style={{ width: "100%", border: "1px solid black", height: "50px", display: "flex", marginRight: "0px", justifyContent: "space-between" }}>
-                                                            <input htmlFor="file" type="text" disabled className="file-upload-input" style={{ height: "100%", border: "none", width: "60%", padding: "12px 20px", cursor: "pointer" }} />
+                                                            <input value={loading === true ? `uploading ${progress}% ` : (image.name) ? image.name : "No file selected"} htmlFor="file" type="text" disabled className="file-upload-input" style={{ height: "100%", border: "none", width: "60%", padding: "12px 20px", cursor: "pointer" }} />
                                                             <label htmlFor="file" style={{ backgroundColor: "rgba(0, 0, 0, 0.2)", padding: "12px 20px", height: "100%", color: "black", cursor: "pointer" }}>Select a File</label>
 
 
                                                         </div>
                                                         <input onChange={uploadVideo} id="file" className="custom-file-upload-hidden" type="file" style={{ display: "none" }} />
                                                     </div>
-                                                    <h3 onClick={() => { setContent(""); setAddC(false) }} style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "right", cursor: "pointer", marginBottom: "20px" }}>close</h3>
+                                                    <div className={classes.containerFluid} style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                                                        <Button
+                                                            onClick={addSectionVid}
+                                                            style={{ fontWeight: "500", textTransform: "capitalize", fontSize: "16px", backgroundColor: "black", border: "1px solid black", color: "white", padding: "10px 18px" }}
+                                                        >
+                                                            Save
+                                                        </Button>
+                                                        <h3 onClick={() => { setContent(""); setAddC(false) }} style={{ fontWeight: "500", fontSize: "18px", color: "black", textAlign: "right", cursor: "pointer", marginBottom: "20px" }}>cancel</h3>
+                                                    </div>
+
                                                 </div> : <></>}
 
                                             </>}
