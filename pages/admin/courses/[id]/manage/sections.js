@@ -146,7 +146,7 @@ export default function searchquery(props) {
         //     console.log(error)
         // });
 
-        fetch('https://solershubfiles.s3-us-east-1.amazonaws.com/', {
+        fetch('https://solershubfiles.s3.us-east-1.amazonaws.com/', {
             headers: {
                 Accept: 'application/json',
                 Authentication: `AWS AKIA2P4DP5VED7Y4HKF6: lNT9tdvSLvccy1gpvfDo4Je3elDz97L0zPkTPl+i`,
